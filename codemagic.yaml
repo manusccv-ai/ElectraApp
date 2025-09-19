@@ -10,9 +10,6 @@ workflows:
         script: |
           git clone https://github.com/manusccv-ai/ElectraApp.git
           cd ElectraApp
-      - name: Install Android SDK and Build Tools
-        script: |
-          sudo sdkmanager "build-tools;33.0.2" "platforms;android-33" "ndk;23.1.7779620"
       - name: Install Gradle if missing
         script: |
           if ! command -v gradle &> /dev/null

@@ -1,0 +1,35 @@
+workflows:
+  android-build-apk:
+    name: Android APK Build (No Signing)
+    environment:
+      vars:
+        JAVA_VERSION: 17
+    trigger:
+      branch:
+        - master
+        - main
+    android:
+      # No signing configuration as requested
+      # signing:
+      #   - android_signing
+    scripts:
+      - name: Set up Java
+        script: |
+          sdk install java $JAVA_VERSION
+          sdk use java $JAVA_VERSION
+      - name: Build Android Debug APK
+        script: |
+          ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/**/*.apk
+    # Optionally, you can add notifications here
+    # notifications:
+    #   - email:
+    #       recipients:
+    #         - user@example.com
+    #       success:
+    #         - email
+    #       failure:
+    #         - email
+
+

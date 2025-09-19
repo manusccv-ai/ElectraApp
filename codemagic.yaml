@@ -3,7 +3,7 @@ workflows:
     name: Android APK Build (No Signing)
     environment:
       vars:
-        JAVA_VERSION: '17'
+        CM_JAVA_VERSION: 17
     triggering:
       events:
         - push
@@ -15,8 +15,9 @@ workflows:
     scripts:
       - name: Set up Java
         script: |
-          sdk install java $JAVA_VERSION
-          sdk use java $JAVA_VERSION
+          # Codemagic typically has Java pre-installed. We'll rely on that.
+          # If a specific version is needed, Codemagic provides CM_JAVA_VERSION variable.
+          echo "Using Java version: $CM_JAVA_VERSION"
       - name: Build Android Debug APK
         script: |
           ./gradlew assembleDebug

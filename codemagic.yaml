@@ -3,15 +3,15 @@ workflows:
     name: Android APK Build (No Signing)
     environment:
       vars:
-        JAVA_VERSION: 17
-    trigger:
-      branch:
-        - master
-        - main
-    android:
-      # No signing configuration as requested
-      # signing:
-      #   - android_signing
+        JAVA_VERSION: '17'
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: 'master'
+          include: true
+        - pattern: 'main'
+          include: true
     scripts:
       - name: Set up Java
         script: |
@@ -21,15 +21,6 @@ workflows:
         script: |
           ./gradlew assembleDebug
     artifacts:
-      - app/build/outputs/**/*.apk
-    # Optionally, you can add notifications here
-    # notifications:
-    #   - email:
-    #       recipients:
-    #         - user@example.com
-    #       success:
-    #         - email
-    #       failure:
-    #         - email
+      - app/build/outputs/apk/debug/app-debug.apk
 
 

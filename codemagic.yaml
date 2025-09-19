@@ -16,8 +16,13 @@ workflows:
       - name: Set up Java
         script: |
           echo "Using Java version: $CM_JAVA_VERSION"
+      - name: List files and directories
+        script: |
+          ls -laR
       - name: Build Android Debug APK
         script: |
           ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
+
+
